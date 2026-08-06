@@ -493,6 +493,51 @@
     .contact-grid { gap: 28px; }
     .cta-row { flex-direction: column; align-items: center; }
   }
+  
+  
+  .carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.slides {
+    display: flex;
+}
+
+.slide {
+    min-width: 100%;
+    display: none;
+    transition: 0.5s;
+}
+
+.slide.active {
+    display: block;
+}
+
+.carousel img {
+    width: 70%;
+    height: auto;
+}
+
+/* Buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
 </style>
 </head>
 <body>
@@ -511,6 +556,19 @@
     <a href="mailto:info@swadglow.in">info@swadglow.in</a>
   </div>
 </nav>
+
+<div class="carousel">
+    <div class="slides">
+        <img src="1.jpeg" class="slide active">
+        <img src="2.jpeg" class="slide">
+        <img src="3.jpeg" class="slide">
+        <img src="4.jpeg" class="slide">
+    </div>
+
+    <!-- Optional Controls -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -531,7 +589,7 @@
     <div class="trust-item"><span class="trust-dot"></span>FSSAI State Licence 10426010000287</div>
     <div class="trust-item"><span class="trust-dot"></span>MSME / Udyam Registered</div>
     <div class="trust-item"><span class="trust-dot"></span>Trademark SWADGLOW™ Filed</div>
-    <div class="trust-item"><span class="trust-dot"></span>Nitrogen-Flushed Packaging</div>
+    <!-- <div class="trust-item"><span class="trust-dot"></span>Nitrogen-Flushed Packaging</div> -->
   </div>
 </section>
 
@@ -542,7 +600,7 @@
   <div class="products-grid">
 
     <div class="product-card">
-      <span class="product-icon">🌾</span>
+      <span class="product-icon"><img width="100px" height="100px" src="e.jpeg"></img></span>
       <div class="product-name">Sattu</div>
       <div class="product-hindi">सत्तू</div>
       <p class="product-desc">Roasted Bengal Gram Flour — the original Bihar superfood. High protein, iron-rich, cooling in summer. 500g pillow pouch.</p>
@@ -550,7 +608,7 @@
     </div>
 
     <div class="product-card">
-      <span class="product-icon">🍵</span>
+      <span class="product-icon"><img width="100px" height="100px" src="b.jfif"></img></span>
       <div class="product-name">Chai-patti</div>
       <div class="product-hindi">चाय-पत्ती</div>
       <p class="product-desc">Premium CTC Tea Leaves sourced from Assam. Strong, brisk, reddish-amber liquor. 250g carton + foil pouch.</p>
@@ -558,7 +616,7 @@
     </div>
 
     <div class="product-card">
-      <span class="product-icon">🌿</span>
+      <span class="product-icon"><img width="100px" height="100px" src="d.jfif"></img></span>
       <div class="product-name">Makhana</div>
       <div class="product-hindi">मखाना</div>
       <p class="product-desc">Roasted Fox Nuts from Darbhanga — Bihar's own GI-origin superfood. Light, crunchy, naturally nutritious. 100g pillow pouch.</p>
@@ -566,7 +624,7 @@
     </div>
 
     <div class="product-card">
-      <span class="product-icon">🌶️</span>
+      <span class="product-icon"><img width="100px" height="100px" src="c.jfif"></img></span>
       <div class="product-name">Sabzi Mix Masala</div>
       <div class="product-hindi">सब्ज़ी मिक्स मसाला</div>
       <p class="product-desc">A perfectly balanced blend of 10 spices for everyday vegetable cooking. No artificial colour or flavour. 50g and 100g packs.</p>
@@ -591,11 +649,11 @@
       <div class="why-title">FSSAI Licensed</div>
       <p class="why-text">State Licence No. 10426010000287. Every batch produced under strict food safety protocols with proper records.</p>
     </div>
-    <div class="why-item">
+    <!-- <div class="why-item">
       <span class="why-icon">💨</span>
       <div class="why-title">Nitrogen Packed</div>
       <p class="why-text">Nitrogen-flushed aluminium foil pouches ensure 9–18 months shelf life with no artificial preservatives needed.</p>
-    </div>
+    </div> -->
     <div class="why-item">
       <span class="why-icon">✅</span>
       <div class="why-title">Clean Label</div>
@@ -653,4 +711,37 @@
 </footer>
 
 </body>
+<script>
+let index = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(i) {
+    slides.forEach((slide, idx) => {
+        slide.classList.remove("active");
+    });
+    slides[i].classList.add("active");
+}
+
+// Auto Slide
+function autoSlide() {
+    index++;
+    if (index >= slides.length) index = 0;
+    showSlide(index);
+}
+
+setInterval(autoSlide, 3000); // 3 sec
+
+// Buttons
+document.querySelector(".next").onclick = () => {
+    index++;
+    if (index >= slides.length) index = 0;
+    showSlide(index);
+};
+
+document.querySelector(".prev").onclick = () => {
+    index--;
+    if (index < 0) index = slides.length - 1;
+    showSlide(index);
+};
+</script>
 </html>
